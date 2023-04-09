@@ -35,12 +35,23 @@
 	    top: -12px;
 	    right: 15px;
 	}
+  sticknav {
+background: #ffffff;
+height: 30px;
+width: 100%;
+margin-right: 0px;
+margin-left: 0px;
+left: 0px;
+right: 0px;
+position: relative;
+z-index: 9999;
+}
+.fixed { position:fixed;}
 </style>
 </head>
 <body>
 	
-    
-  <header>
+<sticknav>    
     <div id="top-mess" class="top-message">
 	    <div class="top-message-content container text-center">
 	        <span class="glyphicon glyphicon-bullhorn"></span> PHƯỚC LỘC THỌ CHO THUÊ BÀN GHẾ RẠP ĐÁM CƯỚI BẾP LẨU.
@@ -81,13 +92,14 @@
 	        <!--/.nav-collapse --> 
 	    </div>
 	</nav>
-</header>
+</sticknav>
+
   <main>
 	<div class="container">
 	    <div class="jumbotron">
 	        <h1>PHƯỚC LỘC THỌ</h1>
 	        <p>Thông tin chi tiết:</p>
-	        <p>Đám cưới là meow</p>
+	        <p>Đám cưới là</p>
 	        <p> <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a> </p>
           <iframe width="400" height="120" src="diachi.html"></iframe>
 			<img draggable="false" height="16" width="16" alt="" referrerpolicy="origin-when-cross-origin" src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Youtube_loading_symbol_1_(wobbly).gif">
@@ -100,7 +112,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
  integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="engine/codinh.js"></script>
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+ <script src="engine/codinh.js"></script>
 <script type="text/javascript">
 	$(window).load(function() {
 	    $('#top-mess').slideDown('fast');
@@ -114,31 +127,7 @@
 	    });
 	});
 
-  var m = document.querySelector("main"),
-    h = document.querySelector("header"),
-    hHeight;
-function setTopPadding() {
-  hHeight = h.offsetHeight;
-  m.style.paddingTop = hHeight + "px";
-}
-function onScroll() {
-    window.addEventListener("scroll", callbackFunc);
-    function callbackFunc() {
-      var y = window.pageYOffset;
-      if (y > 150) {
-        h.classList.add("scroll");
-      } else {
-        h.classList.remove("scroll");
-      }
-    }
-  }
-  window.onload = function() {
-    setTopPadding();
-    onScroll();
-  };
-  window.onresize = function() {
-    setTopPadding();
-  };
+  
 </script>
 </iframe>
 <div style="text-align: center;">Copyright by kimdominic714@gmail.com© 2023. All Rights Reserved.</div>

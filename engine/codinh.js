@@ -1,25 +1,10 @@
-var m = document.querySelector("main"),
-    h = document.querySelector("header"),
-    hHeight;
-function setTopPadding() {
-  hHeight = h.offsetHeight;
-  m.style.paddingTop = hHeight + "px";
-}
-function onScroll() {
-    window.addEventListener("scroll", callbackFunc);
-    function callbackFunc() {
-      var y = window.pageYOffset;
-      if (y > 150) {
-        h.classList.add("scroll");
-      } else {
-        h.classList.remove("scroll");
-      }
-    }
-  }
-  window.onload = function() {
-    setTopPadding();
-    onScroll();
-  };
-  window.onresize = function() {
-    setTopPadding();
-  };
+$(document).ready(function() {
+    var aboveHeight = $('header').outerHeight();
+        $(window).scroll(function(){
+            if ($(window).scrollTop() > aboveHeight){
+            $('sticknav').addClass('fixed').css('top','0').next().css('padding-top','60px');
+            } else {
+           $('sticknav').removeClass('fixed').next().css('padding-top','0');
+            }
+        });
+    });
