@@ -87,7 +87,7 @@
 	    <div class="jumbotron">
 	        <h1>PHƯỚC LỘC THỌ</h1>
 	        <p>Thông tin chi tiết:</p>
-	        <p>Đám cưới</p>
+	        <p>Đám cưới là</p>
 	        <p> <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a> </p>
           <iframe width="400" height="120" src="diachi.html"></iframe>
 			<img draggable="false" height="16" width="16" alt="" referrerpolicy="origin-when-cross-origin" src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Youtube_loading_symbol_1_(wobbly).gif">
@@ -113,6 +113,32 @@
 	        }
 	    });
 	});
+
+  var m = document.querySelector("main"),
+    h = document.querySelector("header"),
+    hHeight;
+function setTopPadding() {
+  hHeight = h.offsetHeight;
+  m.style.paddingTop = hHeight + "px";
+}
+function onScroll() {
+    window.addEventListener("scroll", callbackFunc);
+    function callbackFunc() {
+      var y = window.pageYOffset;
+      if (y > 150) {
+        h.classList.add("scroll");
+      } else {
+        h.classList.remove("scroll");
+      }
+    }
+  }
+  window.onload = function() {
+    setTopPadding();
+    onScroll();
+  };
+  window.onresize = function() {
+    setTopPadding();
+  };
 </script>
 </iframe>
 <div style="text-align: center;">Copyright by kimdominic714@gmail.com© 2023. All Rights Reserved.</div>
