@@ -2,63 +2,60 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Vòng Quay May Mắn</title>
+<title>Vòng Quay CS:GO</title>
 <style>
-  .wheel {
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
+  .wheel-container {
+    width: 500px;
+    height: 100px;
+    overflow: hidden;
     position: relative;
+    border: 1px solid #000;
+  }
+  .wheel {
+    display: flex;
+    width: calc(100px * 10); /* Số lượng ô nhân với chiều rộng của mỗi ô */
+    animation: spin 10s ease-out;
   }
   .segment {
-    width: 150px;
-    height: 150px;
-    position: absolute;
-    transform-origin: 100% 100%;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+  }
+  @keyframes spin {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-100px * 9)); } /* Di chuyển để hiển thị ô cuối cùng */
   }
 </style>
 </head>
 <body>
-<div id="wheel" class="wheel">
-  <!-- Các ô của vòng quay ở đây -->
+<div class="wheel-container">
+  <div id="wheel" class="wheel">
+    <!-- Các ô của vòng quay ở đây -->
+  </div>
 </div>
 <script>
-// Mã JavaScript để tạo vòng quay và điều chỉnh tỉ lệ phần trăm
+// Mã JavaScript để tạo các ô và bắt đầu quay
 const wheel = document.getElementById('wheel');
-let segments = [
-  { color: '#ff0000', label: 'Giải Thưởng 1', probability: 10 },
-  { color: '#00ff00', label: 'Giải Thưởng 2', probability: 20 },
-  { color: '#0000ff', label: 'Giải Thưởng 3', probability: 30 },
-  { color: '#ffff00', label: 'Giải Thưởng 4', probability: 40 }
-];
+let items = ['AK-47', 'M4A1', 'AWP', 'Glock', 'Desert Eagle', 'P90', 'UMP-45', 'SG 553', 'AUG', 'Negev'];
 
-function spin() {
-  let totalProbability = segments.reduce((acc, segment) => acc + segment.probability, 0);
-  let random = Math.random() * totalProbability;
-  let currentProbability = 0;
-
-  for (let i = 0; i < segments.length; i++) {
-    currentProbability += segments[i].probability;
-    if (random <= currentProbability) {
-      alert('Chúc mừng, bạn đã trúng ' + segments[i].label);
-      break;
-    }
-  }
-}
-
-// Thêm các ô vào vòng quay
-segments.forEach((segment, index) => {
-  let segmentDiv = document.createElement('div');
-  segmentDiv.style.backgroundColor = segment.color;
-  segmentDiv.innerText = segment.label;
-  segmentDiv.className = 'segment';
-  segmentDiv.style.transform = 'rotate(' + (index * (360 / segments.length)) + 'deg)';
-  wheel.appendChild(segmentDiv);
+items.forEach(item => {
+  let segment = document.createElement('div');
+  segment.className = 'segment';
+  segment.textContent = item;
+  wheel.appendChild(segment);
 });
 
-// Sự kiện quay
-wheel.addEventListener('click', spin);
+// Bắt đầu quay
+function startSpin() {
+  wheel.style.animation = 'spin 10s ease-out';
+}
 
+// Lắng nghe sự kiện để bắt đầu quay
+document.addEventListener('DOMContentLoaded', startSpin);
 </script>
 </body>
 </html>
