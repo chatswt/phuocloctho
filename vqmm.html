@@ -14,7 +14,7 @@
   .wheel {
     display: flex;
     width: calc(100px * 10); /* Số lượng ô nhân với chiều rộng của mỗi ô */
-    animation: spin 10s ease-out;
+    transition: transform 4s ease-out;
   }
   .segment {
     width: 100px;
@@ -25,37 +25,58 @@
     align-items: center;
     font-size: 24px;
   }
-  @keyframes spin {
-    from { transform: translateX(0); }
-    to { transform: translateX(calc(-100px * 9)); } /* Di chuyển để hiển thị ô cuối cùng */
-  }
 </style>
 </head>
 <body>
 <div class="wheel-container">
   <div id="wheel" class="wheel">
-    <!-- Các ô của vòng quay ở đây -->
+    <!-- Các ô của vòng quay được thêm vào đây bằng JavaScript -->
   </div>
 </div>
 <script>
-// Mã JavaScript để tạo các ô và bắt đầu quay
 const wheel = document.getElementById('wheel');
-let items = ['AK-47', 'M4A1', 'AWP', 'Glock', 'Desert Eagle', 'P90', 'UMP-45', 'SG 553', 'AUG', 'Negev'];
+let prizes = [
+  { name: 'Giải 1', probability: 10, color: '#ff0000' },
+  { name: 'Giải 2', probability: 20, color: '#00ff00' },
+  { name: 'Giải 3', probability: 30, color: '#0000ff' },
+  { name: 'Giải 4', probability: 40, color: '#ffff00' }
+  // Thêm các giải thưởng khác tương tự
+];
 
-items.forEach(item => {
+// Tạo các ô trên vòng quay
+prizes.forEach(prize => {
   let segment = document.createElement('div');
   segment.className = 'segment';
-  segment.textContent = item;
+  segment.style.backgroundColor = prize.color;
+  segment.textContent = prize.name;
   wheel.appendChild(segment);
 });
 
-// Bắt đầu quay
-function startSpin() {
-  wheel.style.animation = 'spin 10s ease-out';
+// Hàm để tính toán giải thưởng dựa trên tỉ lệ phần trăm
+function calculatePrize() {
+  let totalProbability = prizes.reduce((total, prize) => total + prize.probability, 0);
+  let randomPoint = Math.random() * totalProbability;
+  let currentPoint = 0;
+
+  for (let prize of prizes) {
+    currentPoint += prize.probability;
+    if (randomPoint <= currentPoint) {
+      return prize.name; // Trả về tên giải thưởng khi điểm ngẫu nhiên nằm trong khoảng tỉ lệ
+    }
+  }
 }
 
-// Lắng nghe sự kiện để bắt đầu quay
-document.addEventListener('DOMContentLoaded', startSpin);
+// Hàm để quay vòng quay
+function spinWheel() {
+  let degrees = 5000 + Math.random() * 5000; // Số độ quay ngẫu nhiên từ 5000 đến 10000
+  wheel.style.transform = 'rotate(' + degrees + 'deg)';
+  setTimeout(() => {
+    alert('Chúc mừng! Bạn đã trúng ' + calculatePrize());
+  }, 4000); // Hiển thị giải thưởng sau khi quay kết thúc
+}
+
+// Bắt đầu quay khi nhấp vào vòng quay
+wheel.addEventListener('click', spinWheel);
 </script>
 </body>
 </html>
